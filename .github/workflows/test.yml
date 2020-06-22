@@ -53,7 +53,8 @@ jobs:
         sed -i 's/^\(1:macaddr=\).*/\1${{ env.MACADDR1_24G }}/g' rt-k3_nvram.txt
         echo "replace mac 5g address from $(cat rt-k3_nvram.txt | grep ^2:macaddr) to ${{ env.MACADDR2_5G }}"
         sed -i 's/^\(2:macaddr=\).*/\1${{ env.MACADDR2_5G }}/g' rt-k3_nvram.txt
-        
+        echo "list files"
+        ls /opt/work/
 
     - name: Create Release
       id: create_release
@@ -61,7 +62,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        artifacts: "/opt/work/rt-k3_nvram.txt,version.conf"
+        artifacts: "/opt/work/rt-k3_nvram.txt,/opt/work/version.conf"
         allowUpdates: true 
         commit: master 
         tag: build_${{ env.TAG }}
