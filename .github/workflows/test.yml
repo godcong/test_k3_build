@@ -35,8 +35,8 @@ jobs:
         git clone https://github.com/godcong/test_k3_build
      
         cd test_k3_build
-        echo "::set-env name=VERSION::$(git show-ref --heads -s)"
-        echo "::set-env name=TAG::$(git show-ref --heads --hash=8)"
+        echo "::set-env name=MERLIN_VERSION::$(git show-ref --heads -s)"
+        echo "::set-env name=MERLIN_TAG::$(git show-ref --heads --hash=8)"
         
       
     - name: Test Replace
@@ -45,7 +45,7 @@ jobs:
        
         cd  /opt/work
         echo "add version tag"
-        sed -i 's/EXTENDNO=.*/&_${{ env.TAG }}/g' version.conf
+        sed -i 's/EXTENDNO=.*/&_${{ env.MERLIN_TAG }}/g' version.conf
        
         echo "replace mac address from $(cat rt-k3_nvram.txt | grep ^et0macaddr) to ${{ env.ET0MACADDR }}"
         sed -i 's/^\(et0macaddr=\).*/\1${{ env.ET0MACADDR }}/g' rt-k3_nvram.txt
@@ -65,10 +65,10 @@ jobs:
         artifacts: "/opt/work/rt-k3_nvram.txt,/opt/work/version.conf"
         allowUpdates: true 
         commit: master 
-        tag: build_${{ env.TAG }}
+        tag: build_${{ env.MERLIN_TAG }}
         body: |
           this is only a latest build from master
-          version: https://github.com/godcong/test_k3_build/commit/${{ env.VERSION }}
+          version: https://github.com/godcong/test_k3_build/commit/${{ env.MERLIN_VERSION }}
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: false
         prerelease: false
