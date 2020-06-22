@@ -94,7 +94,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        artifacts: "//media/asuswrt/asuswrt-merlin.ng/release/src-rt-7.14.114.x/src/cfe/build/broadcom/bcm947xx/compressed/rt-k3_nvram.txt"
+        artifacts: "/media/asuswrt/asuswrt-merlin.ng/release/src-rt-7.14.114.x/src/cfe/build/broadcom/bcm947xx/compressed/rt-k3_nvram.txt"
         allowUpdates: true 
         commit: master 
         tag: build_${{ env.MERLIN_TAG }}
