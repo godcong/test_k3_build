@@ -87,17 +87,7 @@ jobs:
         echo "replace mac 5g address from $(cat rt-k3_nvram.txt | grep ^2:macaddr) to ${{ env.MACADDR2_5G }}"
         sed -i 's/^\(2:macaddr=\).*/\1${{ env.MACADDR2_5G }}/g' rt-k3_nvram.txt
         
-#    - name : Upload packages
-#      uses: actions/upload-artifact@master
-#      if: always()
-#      with:
-#        name: Padavan-packages
-#        path: /opt/images
-    - name: Move file
-      run: |
-        #sudo mv -f asuswrt-merlin.ng/release/src-rt-7.14.114.x/src/image/*.trx /opt/images/
-        sudo mv -f /media/asuswrt/asuswrt-merlin.ng/release/src-rt-7.14.114.x/src/image/*.trx /opt/images/
-        
+
     - name: Create Release
       id: create_release
       uses: ncipollo/release-action@v1
