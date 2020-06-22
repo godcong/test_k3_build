@@ -45,7 +45,7 @@ jobs:
        
         cd  /opt/work
         echo "add version tag"
-        sed -i 's/EXTENDNO=.*/&_${{ env.MERLIN_TAG }}/g' version.conf
+        sed -i 's/EXTENDNO=.*/&_${{ env.TAG }}/g' version.conf
        
         echo "replace mac address from $(cat rt-k3_nvram.txt | grep ^et0macaddr) to ${{ env.ET0MACADDR }}"
         sed -i 's/^\(et0macaddr=\).*/\1${{ env.ET0MACADDR }}/g' rt-k3_nvram.txt
